@@ -31,7 +31,7 @@ This is a Kanban Board project built with ReactJS and Django. The project allows
 2. Install frontend dependencies: `cd kanban-board/frontend && npm install`
 3. Install backend dependencies: `cd ../kanban-board-backend-1939 && pip install -r requirements.txt`
 4. Set up the database and run migrations: `python manage.py migrate`
-5. Start the development server: `python manage.py runserver`
+5. Start the development server: `python manage.py runsslserver --cert="your-certificate" --key="your-key"`
 
 ## Usage
 
