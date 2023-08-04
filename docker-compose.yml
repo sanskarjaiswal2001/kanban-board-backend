@@ -1,0 +1,27 @@
+version: "3"
+services:
+  db:
+    image: mysql:8
+    ports:
+      - "3306:3306"
+    command: --ssl=0
+    environment:
+      - MYSQL_DATABASE='kanban'
+      - MYSQL_USER='root'
+      - MYSQL_PASSWORD='Root@123'
+      - MYSQL_ROOT_PASSWORD='Root@123'
+      - MYSQL_HOST=''
+      - MYSQL_SSL= "false"
+    volumes:
+      - /tmp/app/mysqld:/var/run/mysqld
+      - ./db:/var/lib/mysql
+  web:
+    build: .
+    command: python ./kanban/manage.py runsslserver --cert=./kanban/certificates/localhost.crt --key=./kanban/certificates/localhost.descrypted.key 0.0.0.0:8000
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app
+      - /tmp/app/mysqld:/run/mysqld
+    depends_on:
+      - db
